@@ -226,15 +226,18 @@ if __name__ == "__main__":
   test_closet_pair(closet_pair_2, 10**3)
   print("\n")
   # Test max_subarray_1
-  A = utils.create_array(10**3)
+  num = 10**3
+  A = utils.create_array(-num, num, num, True)
   _,_,ret = utils.test_alg_func(max_subarray_1, A)
   print(f"boundary = {ret[0]}, max_sum = {ret[1]}")
   # Test max_subarray_2
-  A = utils.create_array(10**3)
+  num = 10**3
+  A = utils.create_array(-num, num, num, True)
   _,_,ret = utils.test_alg_func(max_subarray_2, A)
   print(f"boundary = {ret[0]}, max_sum = {ret[1]}")
   print("\n")
   # Test maxlength_subarray
-  A = utils.create_array(10**4)
+  num = 10**4
+  A = utils.create_array(-num, num, num, True)
   _,_,ret = utils.test_alg_func(maxlength_subarray, A)
   print(f"i_max = {ret[0]}, max_length = {ret[1]}")

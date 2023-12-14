@@ -116,9 +116,9 @@ def bubble_sort_3(A):
   """
   n = len(A)
   for i in range(1, n):
-    for j in range(n-i, i-1, -1):
-      if A[j-1] > A[j]:
-        A[j-1], A[j] = A[j], A[j-1]
+    for j in range(n-1, i-1, -1):
+      if A[j] < A[j-1]:
+        A[j], A[j-1] = A[j-1], A[j]
 
 
 if __name__ == "__main__":

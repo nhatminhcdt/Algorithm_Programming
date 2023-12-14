@@ -1,7 +1,12 @@
+from time import perf_counter
+import pandas as pd
 # Import local
 import sys, os
 sys.path.append(os.getcwd())
 from helper_functions import utils
+
+NUM_TEST_ELEMENTS = 10**6
+
 
 def linear_seach(A, K):
   """Search for K in A
@@ -126,44 +131,11 @@ def bin_search(A, K):
 
 """@brief Implement test functions to test the above functions
 """
-from time import perf_counter
-
-def test(n):
-  """@brief Test the above functions
-  @param n : int
-      number of elements in the array
-  """
-  A, K = utils.create_sorted_array_and_selected_value(n)
-
-  # Test linear search
-  t1 = perf_counter()
-  indx = sentinel_search(A, K)
-  print(f"{K} found at {indx}")
-  t2 = perf_counter()
-  print("Linear search's processing time: %.2f(s)" % (t2-t1))
-
-  # Test sentinel search
-  t1 = perf_counter()
-  indx = sentinel_search(A, K)
-  print(f"{K} found at {indx}")
-  t2 = perf_counter()
-  print("Sentinel search's processing time: %.2f(s)" % (t2-t1))
-
-  # Test jump search
-  t1 = perf_counter()
-  indx = jump_search(A, K)
-  print(f"{K} found at {indx}")
-  t2 = perf_counter()
-  print("Jump search's processing time: %.2f(s)" % (t2-t1))
-
-  # Test binary search
-  t1 = perf_counter()
-  indx = bin_search(A, K)
-  print(f"{K} found at {indx}")
-  t2 = perf_counter()
-  print("Binary search's processing time: %.2f(s)" % (t2-t1))
-
 
 if __name__ == "__main__":
-  print(__package__)
-  test(1000000)
+  func_lst = [linear_seach, sentinel_search, jump_search, bin_search]
+  test_results = [utils.test_search_func(func, NUM_TEST_ELEMENTS) for func in func_lst]
+  test_results_df = pd.DataFrame(pd.DataFrame(test_results, columns=["Algorithm", "Execution time (s)"]))
+  print(test_results_df)
+  print("==Algorithm with the best execution time:==")
+  print(test_results_df.loc[test_results_df["Execution time (s)"] == test_results_df["Execution time (s)"].min()])
